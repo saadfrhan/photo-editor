@@ -94,7 +94,7 @@ function App() {
               <div className="flex w-full flex-col">
                 {options.map((option, index) => {
                   return (
-                    <div className="flex flex-col">
+                    <div key={index} className="flex flex-col">
                       {option.name + " " + option.value}
                       <SLider
                         min={option.range.min}
