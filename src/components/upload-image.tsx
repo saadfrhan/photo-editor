@@ -39,7 +39,7 @@ const UploadImage = ({
     setSelectedFile(e.target.files[0]);
   };
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
+    <div className="grid w-full items-center gap-1.5 max-md:p-4">
       <Label htmlFor="file-upload">
         Picture
       </Label>

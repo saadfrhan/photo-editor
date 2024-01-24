@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { DEFAULT_OPTIONS } from "./lib/constants";
 import SLider from "./components/slider";
-import SidebarItem from "./components/sidebar-item";
 import UploadImage from "./components/upload-image";
 import { Button } from "./components/ui/button";
 
@@ -60,15 +59,15 @@ function App() {
   }
 
   return (
-    <div className="flex py-8 gap-4 w-full max-md:flex-col justify-center min-h-screen items-center">
-       <div className="flex flex-col">
-       {!selectedFile && <UploadImage
+    <div className="flex gap-4 w-full max-md:flex-col justify-center min-h-screen items-center">
+       <div className="flex flex-col gap-2">
+      <UploadImage
           selectedFile={selectedFile}
           setSelectedFile={setSelectedFile}
           preview={preview}
           setPreview={setPreview}
-        />}
-        <div className="flex flex-col">
+        />
+        <div className={`flex flex-col ${!preview ? "hidden" : ""}`}>
           <img
             alt="profile"
             src={preview}
@@ -77,13 +76,16 @@ function App() {
           />
         </div>
        </div>
-        <div className="flex flex-col w-full max-md:p-4 md:w-[50%] gap-2">
+        <div className="flex flex-col w-full max-md:p-4 gap-y-10 md:w-[50%]">
           {selectedFile && (
             <div className="flex gap-2">
               <Button onClick={canvasToImg} className="w-full flex">
               Download
             </Button>
-            <Button onClick={() => setSelectedFile(undefined)} className="w-full flex">
+            <Button onClick={() => {
+              setSelectedFile(undefined)
+              setPreview("")
+            }} className="w-full flex">
               New
             </Button>
             </div>
@@ -94,7 +96,7 @@ function App() {
               <div className="flex w-full flex-col">
                 {options.map((option, index) => {
                   return (
-                    <div key={index} className="flex flex-col">
+                    <div key={index} className="flex flex-col md:px-8">
                       {option.name + " " + option.value}
                       <SLider
                         min={option.range.min}
